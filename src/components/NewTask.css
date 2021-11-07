@@ -1,0 +1,25 @@
+form {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin: 20px 0;
+
+}
+
+form input {
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 5px;
+}
+#add-task-btn {
+    color: white;
+    background-color: rgb(69, 224, 64);
+    padding: 8px;
+    border-radius: 8px;
+}
+form button {
+    background-color: rgb(231, 43, 43);
+    color: white;
+    border-radius: 6px;
+    padding: 8px;
+}
