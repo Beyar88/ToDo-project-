@@ -8,10 +8,11 @@
 }
 
 #body {
-  background-color: #F6F8FA;
+  background-color: #f6f8fa;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -31,17 +32,16 @@ h2 {
   margin: 50px 0px;
 }
 
-/* form {
+#save-change {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   font-size: 1rem;
   font-weight: bold;
-
 }
 
 label {
   font-size: 1.5rem;
-} */
+}
 
 .add-task {
   display: block;
@@ -54,6 +54,7 @@ label {
   font-weight: bold;
   border: none;
 }
+
 .add-task:hover {
   box-shadow: 1px 1px 5px rgb(15, 179, 124);
 }
