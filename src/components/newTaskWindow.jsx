@@ -1,24 +1,24 @@
 import React from "react";
-import './NewTask.css';
+import "./NewTask.css";
 
+function NewTask(props) {
+  return (
+    <div>
+      <form>
+        <input id="descreption-text" type="text"></input>
 
+        <button
+          type="submit"
+          id="add-task-btn"
+          onClick={props.addButtonHandler}
+        >
+          Add
+        </button>
 
-
-
-
-
-
-function NewTask(props){
-        return (
-            <div>
-                <form>
-                    <input id='descreption-text' type='text'></input>
-                    <button type='submit' id='add-task-btn' onClick={props.addTaskText}>Add</button>
-                    <button onClick={props.addNewtask}>close</button>
-                </form>
-            </div>
-        )
+        <button onClick={props.closeButtonHandler}>Close</button>
+      </form>
+    </div>
+  );
 }
-
 
 export default NewTask;

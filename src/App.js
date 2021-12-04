@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import ToDoItem from "./components/todo-items";
 import NewTask from "./components/newTaskWindow.jsx";
+import {
+  addNewTask,
+  getItems,
+  markItemsDone,
+  markUndo,
+  deleteItem,
+} from "./data/data";
 
 function App() {
   const [error, setError] = useState(null);
@@ -11,18 +18,10 @@ function App() {
   useEffect(() => {
     fetch("http://localhost:3100/api/items")
       .then((res) => {
-        if (res.ok) {
-          console.log("Success!");
-        } else {
-          console.log("Unsucessful");
-        }
-
         return res.json();
       })
       .then(
         (result) => {
-          console.log({ result });
-
           setIsLoaded(true);
           setItems(result);
         },
@@ -33,41 +32,41 @@ function App() {
       );
   }, []);
 
-  function markDoneHandler(descreption) {
-    const UndoneTasks = items.filter(
-      (item) => item.descreption !== descreption
-    );
-    const DoneItem = items.filter((item) => item.descreption === descreption);
-    DoneItem[0].complete = "true";
-    const newItems = [...DoneItem, ...UndoneTasks];
-    setItems(newItems);
-  }
+  const markDoneHandler = async (description) => {
+    await markItemsDone(description);
+    const data = await getItems();
+    setItems(data);
+  };
 
-  function unDoHandler(descreption) {
-    const UndoneTasks = items.filter(
-      (item) => item.descreption !== descreption
-    );
-    const DoneItem = items.filter((item) => item.descreption === descreption);
-    DoneItem[0].complete = "false";
-    const newItems = [...DoneItem, ...UndoneTasks];
-    setItems(newItems);
-  }
+  const unDoHandler = async (description) => {
+    await markUndo(description);
+    const data = await getItems();
+    setItems(data);
+  };
 
   const [open, setopen] = useState(false);
 
-  function addNewTask() {
+  function toggleNewTaskFormHandler() {
     setopen((open) => !open);
-    console.log(open);
   }
 
-  function addTaskContent(e) {
+  const addNewTaskHandler = async (e) => {
     e.preventDefault();
-    console.log("working");
-    let taskText = document.querySelector("#descreption-text").value;
-    let textObject = [{ descreption: taskText, complete: "false" }];
-    let newTaskArray = [...textObject, ...items];
-    setItems(newTaskArray);
-  }
+
+    const task = document.querySelector("#descreption-text").value;
+
+    await addNewTask(task);
+
+    const data = await getItems();
+
+    setItems(data);
+  };
+
+  const deleteButtonHandler = async (task) => {
+    await deleteItem(task);
+    const data = await getItems();
+    setItems(data);
+  };
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -78,14 +77,14 @@ function App() {
       <div className="container">
         <h1 className="main-header">AwesomeDo</h1>
 
-        <button className="add-task" onClick={addNewTask}>
+        <button className="add-task" onClick={toggleNewTaskFormHandler}>
           Add new task
         </button>
 
         {open && (
           <NewTask
-            addNewtask={addNewTask}
-            addTaskText={addTaskContent}
+            closeButtonHandler={toggleNewTaskFormHandler}
+            addButtonHandler={addNewTaskHandler}
           ></NewTask>
         )}
 
@@ -97,8 +96,9 @@ function App() {
             <ToDoItem
               key={item.id}
               buttonHandle={markDoneHandler}
-              descreption={item.task}
+              description={item.task}
               complete={item.complete}
+              deleteButtonHandle={deleteButtonHandler}
             ></ToDoItem>
           ))}
 
@@ -110,8 +110,9 @@ function App() {
             <ToDoItem
               key={item.id}
               buttonHandle={unDoHandler}
-              descreption={item.task}
+              description={item.task}
               complete={item.complete}
+              deleteButtonHandle={deleteButtonHandler}
             ></ToDoItem>
           ))}
       </div>
