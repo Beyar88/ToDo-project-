@@ -20,12 +20,30 @@ ol {
   margin: 50px auto;
   text-align: center;
 }
-
+.wellcome {
+  width: fit-content;
+  margin: 10px auto;
+  color: #0fb37c;
+}
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.profile-update-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile-update-icon {
+  font-size: 3rem;
+  color: gray;
+}
 .item-div:hover {
   box-shadow: 1px 10px 15px rgb(217, 235, 224);
 }
 .container {
-  width: 1024px;
+  width: 50%;
   margin: 0 auto;
 }
 h2 {

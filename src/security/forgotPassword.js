@@ -3,21 +3,22 @@ import "./login-form.css";
 import { useAuth } from "./authContext";
 import { Link, useNavigate } from "react-router-dom";
 
-const LogIn = () => {
-  const passwordRef = useRef();
+const ForgotPassword = () => {
   const emailRef = useRef();
-  const { login, currentUser } = useAuth();
+  const { currentUser } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("")
   const navigate = useNavigate();
-
+  const { passwordReset } = useAuth();
+  
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       setError("");
       setLoading(true);
-      await login(emailRef.current.value, passwordRef.current.value);
-      navigate("/");
+      await passwordReset(emailRef.current.value);
+      setMessage("check your inbox for further instructions")
     } catch (error) {
       const errorMessage = error.message
         .replace("Firebase: Error (auth/", "")
@@ -38,11 +39,10 @@ const LogIn = () => {
           alt="ToDO App"
         />
         <p style={{ color: "red" }}>{error}</p>
+        <p>{message}</p>
         <p>{currentUser && currentUser.email}</p>
 
-        <label htmlFor="email">
-          <b>Email</b>
-        </label>
+        <label htmlFor="email"><b>Email</b></label>
         <input
           type="text"
           placeholder="Enter email address"
@@ -51,21 +51,11 @@ const LogIn = () => {
           ref={emailRef}
           required
         />
-        <label htmlFor="psw">
-          <b>Password</b>
-        </label>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          name="psw"
-          id="psw"
-          ref={passwordRef}
-        />
         <button className="sub-but" type="submit" disabled={loading}>
-          Log In
+          Reset Password /
         </button>
+        <Link to="/login" className="forgot-link">Log In</Link>
       </form>
-      <Link to="/password-reset" className="forgot-link">Forgot Password</Link>
       <div className="signup-bar">
         <p>Dont have account.. </p>
         <Link to="/signup">Sign Up</Link>
@@ -74,4 +64,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default ForgotPassword;

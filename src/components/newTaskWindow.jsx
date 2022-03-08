@@ -4,9 +4,8 @@ import "./NewTask.css";
 function NewTask(props) {
   return (
     <div>
-      <form>
+      <form className="add-task-form">
         <input id="descreption-text" type="text"></input>
-
         <button
           type="submit"
           id="add-task-btn"
@@ -14,7 +13,6 @@ function NewTask(props) {
         >
           Add
         </button>
-
         <button onClick={props.closeButtonHandler}>Close</button>
       </form>
     </div>

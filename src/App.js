@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import ToDoItem from "./components/todo-items";
 import NewTask from "./components/newTaskWindow.jsx";
+import { useAuth } from "./security/authContext";
+import LogOut from "./security/LogOut";
+import { Link } from "react-router-dom";
+import { BsFillPersonLinesFill } from "react-icons/bs";
+
 import {
   addNewTask,
   getItems,
@@ -14,22 +19,21 @@ function App() {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const { currentUser } = useAuth();
 
   useEffect(() => {
     fetch("http://localhost:3100/api/items")
       .then((res) => {
         return res.json();
       })
-      .then(
-        (result) => {
-          setIsLoaded(true);
-          setItems(result);
-        },
-        (error) => {
-          setIsLoaded(true);
-          setError(error);
-        }
-      );
+      .then((result) => {
+        setIsLoaded(true);
+        setItems(result);
+      })
+      .catch((error) => {
+        setIsLoaded(true);
+        setError(error);
+      });
   }, []);
 
   const markDoneHandler = async (description) => {
@@ -75,6 +79,14 @@ function App() {
   } else {
     return (
       <div className="container">
+        <h1 className="wellcome">Welcome {currentUser.email}</h1>
+        <nav>
+          <LogOut />{" "}
+          <Link to="/update-profile" className="profile-update-link">
+            <BsFillPersonLinesFill className="profile-update-icon" />
+            Update Profile
+          </Link>
+        </nav>
         <h1 className="main-header">AwesomeDo</h1>
 
         <button className="add-task" onClick={toggleNewTaskFormHandler}>

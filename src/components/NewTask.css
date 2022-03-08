@@ -1,12 +1,11 @@
-form {
+.add-task-form {
     display: flex;
     justify-content: space-between;
     width: 400px;
     margin: 20px 0;
-
+    flex-direction: row;
 }
-
-form input {
+ input {
     font-size: 1rem;
     padding: 5px;
     border-radius: 5px;
@@ -17,7 +16,7 @@ form input {
     padding: 8px;
     border-radius: 8px;
 }
-form button {
+ button {
     background-color: rgb(231, 43, 43);
     color: white;
     border-radius: 6px;
