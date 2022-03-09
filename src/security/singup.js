@@ -14,7 +14,7 @@ const SingUp = () => {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (passwordRef.current.value != passwordconfirmRef.current.value) {
+    if (passwordRef.current.value !== passwordconfirmRef.current.value) {
       return setError("passowrd does not match");
     }
     try {

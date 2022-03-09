@@ -1,5 +1,5 @@
-const getItems = async () => {
-  const url = "http://localhost:3100/api/items";
+const getItems = async (userID) => {
+  const url = `http://localhost:3100/api/items/${userID}`;
 
   const response = await fetch(url);
 
@@ -17,7 +17,7 @@ const addNewTask = async (task) => {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ task: task }),
+    body: JSON.stringify(task),
   };
 
   try {
@@ -27,16 +27,16 @@ const addNewTask = async (task) => {
   }
 };
 
-const markItemsDone = async (task) => {
+const markItemsDone = async (description, userID) => {
   const url = "http://localhost:3100/api/items/markdone";
-
+  const item = { Description: description, UserID: userID };
   const settings = {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ task: task }),
+    body: JSON.stringify(item),
   };
 
   try {
@@ -46,16 +46,16 @@ const markItemsDone = async (task) => {
   }
 };
 
-const markUndo = async (task) => {
+const markUndo = async (description, userID) => {
   const url = "http://localhost:3100/api/items/undo";
-
+  const item = { Description: description, UserID: userID };
   const settings = {
     method: "post",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ task: task }),
+    body: JSON.stringify(item),
   };
   try {
     await fetch(url, settings);
@@ -64,15 +64,16 @@ const markUndo = async (task) => {
   }
 };
 
-const deleteItem = async (task) => {
+const deleteItem = async (description, userID) => {
   const url = "http://localhost:3100/api/items/delete";
+  const item = { Description: description, UserID: userID };
   const settings = {
     method: "post",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ task: task }),
+    body: JSON.stringify(item),
   };
   try {
     await fetch(url, settings);

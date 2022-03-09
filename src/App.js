@@ -6,7 +6,6 @@ import { useAuth } from "./security/authContext";
 import LogOut from "./security/LogOut";
 import { Link } from "react-router-dom";
 import { BsFillPersonLinesFill } from "react-icons/bs";
-
 import {
   addNewTask,
   getItems,
@@ -22,7 +21,7 @@ function App() {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    fetch("http://localhost:3100/api/items")
+    fetch(`http://localhost:3100/api/items/${currentUser.uid}`)
       .then((res) => {
         return res.json();
       })
@@ -37,14 +36,14 @@ function App() {
   }, []);
 
   const markDoneHandler = async (description) => {
-    await markItemsDone(description);
-    const data = await getItems();
+    await markItemsDone(description, currentUser.uid);
+    const data = await getItems(currentUser.uid);
     setItems(data);
   };
 
   const unDoHandler = async (description) => {
-    await markUndo(description);
-    const data = await getItems();
+    await markUndo(description, currentUser.uid);
+    const data = await getItems(currentUser.uid);
     setItems(data);
   };
 
@@ -54,21 +53,22 @@ function App() {
     setopen((open) => !open);
   }
 
-  const addNewTaskHandler = async (e) => {
-    e.preventDefault();
-
-    const task = document.querySelector("#descreption-text").value;
+  const addNewTaskHandler = async () => {
+    const task = {
+      taskValue: document.querySelector("#descreption-text").value,
+      userID: currentUser.uid,
+    };
 
     await addNewTask(task);
 
-    const data = await getItems();
+    const data = await getItems(currentUser.uid);
 
     setItems(data);
   };
 
-  const deleteButtonHandler = async (task) => {
-    await deleteItem(task);
-    const data = await getItems();
+  const deleteButtonHandler = async (description) => {
+    await deleteItem(description, currentUser.uid);
+    const data = await getItems(currentUser.uid);
     setItems(data);
   };
 
