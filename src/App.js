@@ -33,7 +33,7 @@ function App() {
         setIsLoaded(true);
         setError(error);
       });
-  }, []);
+  }, [currentUser.uid]);
 
   const markDoneHandler = async (description) => {
     await markItemsDone(description, currentUser.uid);

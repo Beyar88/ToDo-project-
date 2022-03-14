@@ -76,3 +76,7 @@ label {
 .add-task:hover {
   box-shadow: 1px 1px 5px rgb(15, 179, 124);
 }
+
+#pswcon,#psw,#email {
+padding: 10px;
+}

@@ -7,7 +7,7 @@ const SingUp = () => {
   const passwordconfirmRef = useRef();
   const passwordRef = useRef();
   const emailRef = useRef();
-  const { signup, currentUser } = useAuth();
+  const { signup } = useAuth();
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const SingUp = () => {
         </label>
         <input
           type="password"
-          placeholder="Enter Password"
+          placeholder="Enter Password Again"
           name="pswconfirm"
           id="pswcon"
           ref={passwordconfirmRef}

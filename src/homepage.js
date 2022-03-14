@@ -1,7 +1,6 @@
 import React from "react";
 import SingUp from "./security/singup";
 import LogIn from "./security/login";
-import LogOut from "./security/LogOut";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./security/authContext";
 import App from "./App";
