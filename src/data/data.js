@@ -1,5 +1,5 @@
 const getItems = async (userID) => {
-  const url = `http://localhost:3100/api/items/${userID}`;
+  const url = `https://beyar-todo-app.herokuapp.com/api/items/${userID}`;
 
   const response = await fetch(url);
 
@@ -9,7 +9,7 @@ const getItems = async (userID) => {
 };
 
 const addNewTask = async (task) => {
-  const url = "http://localhost:3100/api/items";
+  const url = "https://beyar-todo-app.herokuapp.com/api/items";
 
   const settings = {
     method: "POST",
@@ -28,7 +28,7 @@ const addNewTask = async (task) => {
 };
 
 const markItemsDone = async (description, userID) => {
-  const url = "http://localhost:3100/api/items/markdone";
+  const url = "https://beyar-todo-app.herokuapp.com/api/items/markdone";
   const item = { Description: description, UserID: userID };
   const settings = {
     method: "POST",
@@ -47,7 +47,7 @@ const markItemsDone = async (description, userID) => {
 };
 
 const markUndo = async (description, userID) => {
-  const url = "http://localhost:3100/api/items/undo";
+  const url = "https://beyar-todo-app.herokuapp.com/api/items/undo";
   const item = { Description: description, UserID: userID };
   const settings = {
     method: "post",
@@ -65,7 +65,7 @@ const markUndo = async (description, userID) => {
 };
 
 const deleteItem = async (description, userID) => {
-  const url = "http://localhost:3100/api/items/delete";
+  const url = "https://beyar-todo-app.herokuapp.com/api/items/delete";
   const item = { Description: description, UserID: userID };
   const settings = {
     method: "post",

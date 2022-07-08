@@ -21,7 +21,7 @@ function App() {
   const { currentUser } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:3100/api/items/${currentUser.uid}`)
+    fetch(`https://beyar-todo-app.herokuapp.com/api/items/${currentUser.uid}`)
       .then((res) => {
         return res.json();
       })
