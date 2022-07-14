@@ -19,9 +19,11 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
   const { currentUser } = useAuth();
-
+  let ENVurl =
+    process.env.REACT_APP_DevelopmentURl ||
+    "https://beyar-todo-app.herokuapp.com/api/items";
   useEffect(() => {
-    fetch(`https://beyar-todo-app.herokuapp.com/api/items/${currentUser.uid}`)
+    fetch(`${ENVurl}/${currentUser.uid}`)
       .then((res) => {
         return res.json();
       })
