@@ -55,7 +55,8 @@ function App() {
     setopen((open) => !open);
   }
 
-  const addNewTaskHandler = async () => {
+  const addNewTaskHandler = async (e) => {
+    e.preventDefault();
     const task = {
       taskValue: document.querySelector("#descreption-text").value,
       userID: currentUser.uid,

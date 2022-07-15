@@ -4,12 +4,11 @@ import "./NewTask.css";
 function NewTask(props) {
   return (
     <div>
-      <form className="add-task-form">
+      <form className="add-task-form" onSubmit={props.addButtonHandler}>
         <input id="descreption-text" type="text"></input>
         <button
           type="submit"
           id="add-task-btn"
-          onClick={props.addButtonHandler}
         >
           Add
         </button>
