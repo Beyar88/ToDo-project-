@@ -12,7 +12,7 @@ function NewTask(props) {
         >
           Add
         </button>
-        <button onClick={props.closeButtonHandler}>Close</button>
+        <button onClick={props.closeButtonHandler} type='button'>Close</button>
       </form>
     </div>
   );
