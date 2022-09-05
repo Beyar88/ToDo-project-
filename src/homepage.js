@@ -25,12 +25,10 @@ function HomePage() {
               </RequireAuth>
             }
           />
-
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AuthProvider>
     </Router>
   );
 }
-
 export default HomePage;
